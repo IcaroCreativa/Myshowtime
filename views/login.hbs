@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/logo.ico">
+    <title>Myshowtime Login</title>
+</head>
+<body id="bg_img">
+    <div class="mx-auto  w-[500px] h-[500px] mt-24">
+    <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col">
+    <div class="mb-4">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
+        Email
+      </label>
+      <input onclick="clear_error_message()" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="text" placeholder="email">
+
+    </div>
+    <div class="mb-6">
+      <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+        Password
+      </label>
+      <input onclick="clear_error_message()" class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" id="password" type="password" placeholder="******************">
+      <p id="error-message" class="text-red-600 text-sm italic mb-2"></p>
+      <label for="checkbox">
+      <input id="checkbox" type="checkbox" checked="true" >
+      Remember me
+      </label>
+    </div>
+    <div class="flex items-center justify-between">
+      <button onclick='login()' class="bg-blue-600 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="button">
+        Sign In
+      </button>
+      <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="/forgotpassword">
+        Forgot Password?
+      </a>
+    </div>
+</div>
+</div>
+  
+</body>
+</html>
+
+
+
+
+<script>
+
+function clear_error_message(){
+    
+   
+    email=document.getElementById('email').value
+    password=document.getElementById('password').value
+    error_message=document.getElementById('error-message')
+    if(error_message.innerText=='Email or Password invalid'){
+    error_message.innerHTML='';
+    password.innerHTML='';
+
+    }else{}
+
+
+
+}
+
+
+function login(){
+
+    email=document.getElementById('email').value
+    password=document.getElementById('password').value
+    error_message=document.getElementById('error-message')
+    checkbox=document.getElementById('checkbox')
+   
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+    "email": email,
+    "password": password
+    });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    fetch("http://localhost:3000/auth/login", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+     
+    if(result.access_token){
+        let isadmin=result.user.isadmin
+        // Enregistre le cookie "email" avec la valeur "valeur" et une durée de 24 heures si l'utilisateur a demandé à enregister le token
+        // Le cookie est effacé automatiquement après 24 heures 
+        removeAllCookies();
+        setCookie('token', result.access_token, 1);
+        setCookie("isadmin",isadmin , 1);
+        setCookie("email",result.user.email , 1);
+        setCookie("id",result.user._id , 1);
+         
+        if(checkbox.checked){
+        localStorage.setItem('token', result.access_token);
+        localStorage.setItem('email', result.user.email);
+        localStorage.setItem('isadmin', isadmin);
+        localStorage.setItem('id', result.user._id);
+        
+        }
+        location.href = '/';
+    }
+    else{  
+        error_message.innerHTML='Email or Password invalid'   
+    }
+    }
+    )
+    .catch(error => console.log('error', error));
+}
+
+
+function setCookie(name, value, expires) {
+  var date = new Date();
+  date.setTime(date.getTime() + (expires*24*60*60*1000));
+  var expires = "expires="+ date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function removeAllCookies() {
+  // Get all the cookies
+  const cookies = document.cookie.split(';');
+// Iterate over the cookies and set their expiration date to a past date
+  cookies.forEach(cookie => {
+    const name = cookie.split('=')[0];
+    setCookie(name, '', -1);
+  });
+}
+
+
+
+ 
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<style>
+#bg_img{
+    background-image: url("https://images.unsplash.com/photo-1573152958734-1922c188fba3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80");
+    }
+</style>
