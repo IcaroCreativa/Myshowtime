@@ -1,5 +1,6 @@
 # Ticket Booking Website
-This is a ticket booking website for concerts and festivals. It consists of a frontoffice for users to browse and book tickets, and a backoffice for administrators to manage the concert schedule and view booking statistics.
+
+This is a ticket booking website for concerts and festivals, developed as a project for the full-stack developer program at EPITECH school. It consists of a frontoffice for users to browse and book tickets, and a backoffice for administrators to manage the concert schedule and view booking statistics.
 
 ##Frontoffice Functionalities (for users)
 View available concerts
