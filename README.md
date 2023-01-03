@@ -1,3 +1,42 @@
+# Ticket Booking Website
+This is a ticket booking website for concerts and festivals. It consists of a frontoffice for users to browse and book tickets, and a backoffice for administrators to manage the concert schedule and view booking statistics.
+
+##Frontoffice Functionalities (for users)
+View available concerts
+Register and log in to the website
+Change email and password (while logged in)
+Book concert tickets
+Maintain a list of favorite bands
+Receive notifications when a band in the favorite list has a scheduled concert
+Filter concerts by genre, date, and group
+Generate QR code for booked concert tickets
+
+## Backoffice Functionalities (for administrators)
+Create, update, and delete user accounts
+Create, update, and delete concerts
+Promote a user account to administrator
+View detailed booking statistics
+
+## Requirements
+Install NestJs, and an account in MongoDB atlas. You have to create cluster with collections: users, concerts, bands (see the schema folder to see the items you need to create in every collection)
+A web browser to access the website
+An internet connection to connect to the website
+
+## Getting Started
+Open the website in your web browser
+If you are a new user, click the "Register" button and fill out the registration form. If you are a returning user, enter your email and password to log in.
+Once logged in, you can browse available concerts, add them to your favorites, and book tickets. If you are an administrator, you will also have access to the backoffice to manage concerts and view booking statistics.
+
+## Tech Stack
+The frontend of the website is built using HTML (HBS), CSS(Tailwind), and JavaScript.
+The backend of the website is built using NestJS and connects to a MongoDB database hosted on Atlas.
+
+Contact
+If you have any questions or need support, please don't hesitate to contact me icarocreativa@gmail.com
+
+
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
