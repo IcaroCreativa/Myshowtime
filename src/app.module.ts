@@ -19,7 +19,7 @@ import { TicketService } from './service/ticket/ticket.service';
 import { TicketController } from './controller/ticket/ticket.controller';
 
 @Module({
-  imports:[MongooseModule.forRoot('mongodb+srv://Pedro:******@cluster0.lrhozex.mongodb.net/test?retryWrites=true&w=majority',{dbName: 'MyShowTime'}),
+  imports:[MongooseModule.forRoot('your mongo db cluster link',{dbName: 'MyShowTime'}),
 MongooseModule.forFeature([{ name: 'User', schema: UserSchema },{ name: 'Concert', schema: ConcertSchema },{ name: 'Ticket', schema: TicketSchema },{ name: 'Band', schema: BandSchema },]),
 AuthModule,
 ],  
